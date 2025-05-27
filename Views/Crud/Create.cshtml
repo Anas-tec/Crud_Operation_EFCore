@@ -1,0 +1,71 @@
+﻿@*
+    For more information on enabling MVC for empty projects, visit https://go.microsoft.com/fwlink/?LinkID=397860
+*@
+@model Information
+
+
+<form asp-action="Create" method="post" >
+    <h3>Creating New Information</h3>
+    @if (ViewBag.ErrorMessage != null)
+    {
+        <div class="alert alert-danger">@ViewBag.ErrorMessage</div>
+    }
+    <p>
+        <label>Name:</label><br />
+        <input asp-for="Name" placeholder="Enter your name" />
+        <span asp-validation-for="Name" class="text-danger" required></span>
+    </p>
+    <p>
+        <label>Phone:</label><br />
+        <input asp-for="Phone" type="number" placeholder="Enter your Phone no" />
+        <span asp-validation-for="Phone" class="text-danger" required></span>
+    </p>
+    <p>
+        <label>Email:</label><br />
+        <input asp-for="Email" type="email" placeholder="Enter your Email" />
+        <span asp-validation-for="Email" class="text-danger" required></span>
+    </p>
+    <p>
+        <label>Address:</label><br />
+        <input asp-for="Address" type="text" placeholder="Enter your Address" />
+        <span asp-validation-for="Address" class="text-danger" required></span>
+    </p>
+    <p>
+        <label>Gender</label><br />
+        <input type="radio" asp-for="Gender" name="Gender" value="Male" class="form-check-input" /> Male <br />
+        <input type="radio" asp-for="Gender" name="Gender" value="Female" class="form-check-input" /> Female <br />
+        <span asp-validation-for="Gender" class="text-danger" required></span>
+    </p>
+    <p>
+        <label>Known Language</label><br />
+        <input type="checkbox" name="KnownLanguage" value="Tamil" class="form-check-input"/> Tamil<br />
+        <input type="checkbox" name="KnownLanguage" value="English" class="form-check-input" /> English<br />
+        <input type="checkbox" name="KnownLanguage" value="Malayalam" class="form-check-input" /> Malayalam<br />
+        <input type="checkbox" name="KnownLanguage" value="Telugu" class="form-check-input" /> Telugu<br />
+        <input type="checkbox" name="KnownLanguage" value="Hindi" class="form-check-input" /> Hindi<br />
+        <input type="checkbox" name="KnownLanguage" value="Other" class="form-check-input" /> Other<br />
+        <span asp-validation-for="KnownLanguage" class="text-danger" required ></span>
+    </p>
+    <p>
+        <label for="MotherTongue">Mother Tongue Language</label><br />
+        <select asp-for="MotherTongue" name="MotherTongue" required>
+            <option value="Tamil" class="form-select">Tamil</option>
+            <option value="English" class="form-select">English</option>
+            <option value="Malayalam" class="form-select">Malayalam</option>
+            <option value="Other" class="form-select">Other</option>
+        </select>
+    </p>
+    <p>
+        <label asp-for="BirthDate"></label><br />
+        <input asp-for="BirthDate" type="date" />
+        <span asp-validation-for="BirthDate" class="text-danger" required></span>
+    </p>
+    <button type="submit" class="btn btn-primary mx-2" style="border-radius: 20px;">Submit</button>
+    <button type="reset" class="btn btn-secondary mx-2" style="border-radius: 20px;">Reset</button>
+    
+    <br /><br /><br />
+
+</form>
+@section Scripts {
+    <partial name="_ValidationScriptsPartial" />
+}

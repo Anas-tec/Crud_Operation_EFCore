@@ -1,0 +1,73 @@
+﻿@model Information
+@{
+    var allLanguages = new[] { "English", "Tamil", "Hindi", "Malayalam", "Telugu" ,"Others"};
+}
+<h3>Edit </h3>
+<h4>@ViewBag.Message</h4>
+
+@if (TempData["ErrorMessage"] != null)
+{
+    <div class="alert alert-danger">
+        @TempData["ErrorMessage"]
+    </div>
+}
+<form asp-action="Edit" method="post">
+    <input asp-for="Id" type="hidden" required/>
+    <p>
+        <label>Name</label>
+        <input asp-for="Name" />
+        <span asp-validation-for="Name" class="text-danger" required></span>
+    </p>
+    <p>
+        <label>Phone</label>
+        <input asp-for="Phone" />
+        <span asp-validation-for="Phone" class="text-danger" required></span>
+    </p>
+    <p>
+        <label>Email</label>
+        <input asp-for="Email" />
+        <span asp-validation-for="Email" class="text-danger" required></span>
+    </p>
+    <p>
+        <label>Address</label>
+        <input asp-for="Address" />
+        <span asp-validation-for="Address" class="text-danger" required></span>
+
+    </p>
+    <p>
+        <label>Gender</label>
+        <input asp-for="Gender" />
+        <span asp-validation-for="Gender" class="text-danger" required></span>
+    </p>
+    <p>
+        <label>KnownLanguage</label>
+        @foreach (var lang in allLanguages)
+        {
+            <div class="form-check">
+                <input class="form-check-input"
+                       type="checkbox"
+                       name="KnownLanguage"
+                       value="@lang"
+                       @(Model.KnownLanguage != null && Model.KnownLanguage.Contains(lang) ? "checked" : "") />
+                <label class="form-check-label">@lang</label>
+            </div>
+        }
+        <span asp-validation-for="KnownLanguage" class="text-danger" required></span>
+    </p>
+    <p>
+        <label>Mother tongue</label>
+        <input asp-for="MotherTongue" />
+
+    </p>
+    <p>
+        <label>DOB</label>
+        <input asp-for="BirthDate" />
+        <span asp-validation-for="BirthDate" class="text-danger" required></span>
+    </p>
+
+    <button type="submit" class="btn btn-primary mx-2" style="border-radius: 20px;">Update</button>
+    <br /><br /><br />
+</form>
+@section Scripts {
+    <partial name="_ValidationScriptsPartial" />
+}

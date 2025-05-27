@@ -1,0 +1,63 @@
+﻿@model Information
+@{
+    
+}
+<h3>Delete</h3>
+<h4>@ViewBag.Message</h4>
+
+@if (TempData["ErrorMessage"] != null)
+{
+    <div class="alert alert-danger">
+        @TempData["ErrorMessage"]
+    </div>
+}
+<form asp-action="Edit" method="post">
+    <input asp-for="Id" type="hidden" required />
+    <p>
+        <label>Name</label>
+        <input asp-for="Name" readonly />
+    </p>
+    <p>
+        <label>Phone</label>
+        <input asp-for="Phone" readonly />
+    </p>
+    <p>
+        <label>Email</label>
+        <input asp-for="Email" readonly />
+    </p>
+    <p>
+        <label>Address</label>
+        <input asp-for="Address" readonly />
+    </p>
+    <p>
+        <label>Gender</label>
+        <input asp-for="Gender" readonly />
+    </p>
+    <p>
+        <label>KnownLanguage</label>
+        @if (Model.KnownLanguage != null && Model.KnownLanguage.Any())
+        {
+            @foreach (var lang in Model.KnownLanguage)
+            {
+                <div class="form-group">
+                    <input type="text" value="@lang" readonly />
+                </div>
+            }
+        }
+    </p>
+    <p>
+        <label>Mother tongue</label>
+        <input asp-for="MotherTongue" readonly />
+    </p>
+    <p>
+        <label>DOB</label>
+        <input asp-for="BirthDate" readonly />
+    </p>
+
+    <button type="submit" class="btn btn-primary mx-2" style="border-radius: 20px;">Delete</button><br /><br />
+    <a href="/Crud/Index">Back to list</a>
+    <br /><br /><br />
+</form>
+@section Scripts {
+    <partial name="_ValidationScriptsPartial" />
+}

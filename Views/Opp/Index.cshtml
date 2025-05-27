@@ -1,0 +1,31 @@
+﻿@*
+    For more information on enabling MVC for empty projects, visit https://go.microsoft.com/fwlink/?LinkID=397860
+*@
+@model CrudTest.Models.Operator
+<form asp-action="Index" method="post">
+    <h2>Operators</h2>
+    <label>Number 1 : </label><input asp-for="Num1" placeholder="Enter any number" /><br /><br />
+    <label>Number 2 : </label><input asp-for="Num2" placeholder="Enter any number" /><br /><br />
+    <br /><input type="submit" value="Calulate"/>
+
+    <p>
+        <label>Addition</label>
+        <input asp-for="Add" readonly />
+    </p>
+    <p>
+        <label>Subraction</label>
+        <input asp-for="Sub" readonly />
+    </p>
+    <p>
+        <label>Multiplication</label>
+        <input asp-for="Mul" readonly />
+    </p>
+    <p>
+        <label>Divition</label>
+        <input asp-for="Div" readonly />
+    </p><br /><br />
+    <a href="/Opp/Stu">Student Operation</a>
+</form>
+@section Scripts {
+    <partial name="_ValidationScriptsPartial" />
+}

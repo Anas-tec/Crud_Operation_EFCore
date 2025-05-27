@@ -1,0 +1,57 @@
+﻿@*
+    For more information on enabling MVC for empty projects, visit https://go.microsoft.com/fwlink/?LinkID=397860
+*@
+@model List<Information>
+
+<h2>Details List</h2>
+</br></hr>
+@if (TempData["ErrorMessage"] != null)
+{
+    <div class="alert alert-danger">
+        @TempData["ErrorMessage"]
+    </div>
+}
+<table class="table table-bordered table-striped table-hover">
+    <tr class="table-dark">
+        <th>Id</th>
+        <th>Name</th>
+        <th>Phone</th>
+        <th>Email</th>
+        <th>Address</th>
+        <th>Gender</th>
+        <th>Known Language</th>
+        <th>Mother Tongue</th>
+        <th>Birth Date</th>
+        <th>Operation</th>
+    </tr>
+    @foreach (var item in Model)
+    {
+        <tr>
+            <td>@item.Id</td>
+            <td>@item.Name</td>
+            <td>@item.Phone</td>
+            <td>@item.Email</td>
+            <td>@item.Address</td>
+            <td>@item.Gender</td>
+            <td>
+            @if (item.KnownLanguage != null && item.KnownLanguage.Any())
+            {
+                @string.Join(", ", item.KnownLanguage)
+            }
+            else
+            {
+                <em>None</em>
+            }
+            </td>
+            <td>@item.MotherTongue</td>
+            <td>@item.BirthDate</td>
+            <td><a href="/Crud/Edit/@item.Id">Edit</a>-<a href="/Crud/Delete/@item.Id">Remove</a></td>
+
+        </tr>
+    }
+</table>
+<br />
+<a href="/Crud/Create">Create New Details</a>
+<br />
+<br />
+<br />

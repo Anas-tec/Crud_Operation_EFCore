@@ -1,0 +1,95 @@
+﻿@*
+    For more information on enabling MVC for empty projects, visit https://go.microsoft.com/fwlink/?LinkID=397860
+*@
+
+
+@model StudentMarks
+
+<h2>Student Marks Entry</h2>
+
+<form >
+    <div>
+        <label>Subject 1:</label>
+        <input asp-for="Sub1" type="number" min="0" max="100" required />
+    </div>
+    <div>
+        <label>Subject 2:</label>
+        <input asp-for="Sub2" type="number" min="0" max="100" required />
+    </div>
+    <div>
+        <label>Subject 3:</label>
+        <input asp-for="Sub3" type="number" min="0" max="100" required />
+    </div>
+    <div>
+        <label>Subject 4:</label>
+        <input asp-for="Sub4" type="number" min="0" max="100" required />
+    </div>
+    <div>
+        <label>Subject 5:</label>
+        <input asp-for="Sub5" type="number" min="0" max="100" required />
+    </div>
+    <div>
+        <label>Subject 6:</label>
+        <input asp-for="Sub6" type="number" min="0" max="100" required />
+    </div><br />
+    <button type="submit" name="actiontype" value="cal" class="btn btn-primary mx-2" style="border-radius: 20px;">Calculate</button><br /><br />
+
+    <div>
+        <table>
+            <tr>
+                <th>Subject     |</th>
+                <th>Marks        |</th>
+                <th>Result</th>
+            </tr>
+            <tr>
+                <td>Tamil</td>
+                <td>@Model.Sub1</td>
+                <td>@Model.Sub1Result</td>
+            </tr>
+            <tr>
+                <td>English</td>
+                <td>@Model.Sub2</td>
+                <td>@Model.Sub2Result</td>
+            </tr>
+            <tr>
+                <td>Maths</td>
+                <td>@Model.Sub3</td>
+                <td>@Model.Sub3Result</td>
+            </tr>
+            <tr>
+                <td>Biology</td>
+                <td>@Model.Sub4</td>
+                <td>@Model.Sub4Result</td>
+            </tr>
+            <tr>
+                <td>Chemistry</td>
+                <td>@Model.Sub5</td>
+                <td>@Model.Sub5Result</td>
+            </tr>
+            <tr>
+                <td>Physics</td>
+                <td>@Model.Sub6</td>
+                <td>@Model.Sub6Result</td>
+            </tr>
+        </table>
+        <br /><br />
+        <p>Overall Result : @Model.Result</p>
+        <p>Total : @Model.Total</p>
+        <p>Percentage : @Model.Percentage</p>
+        <p>GPA : @Model.Gpa</p>
+        
+    </div>
+    @*<div>
+        <label>Total:</label>
+        <p><strong>@Model.Total</strong></p>
+    </div>
+    <div>
+        <label>Percentage:</label>
+        <p><strong>@Model.Percentage</strong></p>
+    </div>
+    *@
+
+</form>
+@section Scripts {
+    <partial name="_ValidationScriptsPartial" />
+}
