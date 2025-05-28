@@ -34,14 +34,15 @@
             <td>@item.Address</td>
             <td>@item.Gender</td>
             <td>
-            @if (item.KnownLanguage != null && item.KnownLanguage.Any())
+                @string.Join(", ", item.KnownLanguage)
+           @* @if (item.KnownLanguage != null && item.KnownLanguage.Any())
             {
                 @string.Join(", ", item.KnownLanguage)
             }
             else
             {
                 <em>None</em>
-            }
+            }  *@
             </td>
             <td>@item.MotherTongue</td>
             <td>@item.BirthDate</td>
