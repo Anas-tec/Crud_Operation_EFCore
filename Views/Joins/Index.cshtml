@@ -1,0 +1,108 @@
+﻿@*
+{
+    ViewData["Title"] = "Country and State";
+}
+
+<select id="CountryId">
+    <option value="">Select Country</option>
+    @foreach (var c in ViewBag.Countries)
+    {
+        <option value="@c.Value">@c.Text</option>
+    }
+</select>
+
+<select id="StateId">
+    <option value="">Select State</option>
+</select>
+
+@section Scripts {
+    <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+    <script>
+        $('#CountryId').change(function () {
+            var countryId = $(this).val();
+            if (countryId) {
+                $.getJSON('/Joins/GetStatesByCountry', { countryId: countryId }, function (state) {
+                    var options = '<option value="">Select State</option>';
+                    if (state) {
+                        options += '<option value="' + state.stateId + '">' + state.name + '</option>';
+                    }
+                    $('#StateId').html(options);
+                });
+            } else {
+                $('#StateId').html('<option value="">Select State</option>');
+            }
+        });
+    </script>
+}
+*@
+
+@{
+    ViewData["Title"] = "Country and State";
+}
+<h2>Select Location</h2>
+<div>
+    <label for="countryDropdown">Country:</label>
+    <select id="countryDropdown" asp-items="@(new SelectList(ViewBag.Countries, "CountryId", "Name"))">
+        <option value="">Select a country</option>
+    </select>
+</div>
+
+<div>
+    <label for="stateDropdown">State:</label>
+    <select id="stateDropdown">
+        <option value="">Select a state</option>
+    </select>
+</div>
+@section Scripts
+{
+    <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+
+    <script>
+        $(document).ready(function ()
+        {
+                    $('#countryDropdown').change(function () {
+            var countryId = $(this).val();
+
+            // Show loading message while waiting for states to load
+            $('#stateDropdown').empty().append('<option value="">Loading...</option>');
+
+            if (countryId) {
+                $.get('/Joins/GetStates?countryId=' + countryId, function (states) {
+                    $('#stateDropdown').empty().append('<option value="">Select a state</option>');
+
+                    $.each(states, function (i, state) {
+                        $('#stateDropdown').append('<option value="' + state.stateId + '">' + state.name + '</option>');
+                    });
+                }).fail(function () {
+                    $('#stateDropdown').empty().append('<option value="">Failed to load</option>');
+                });
+            } else {
+                $('#stateDropdown').empty().append('<option value="">Select a state</option>');
+            }
+        });
+
+            @*('#countryDropdown').change(function ()
+            {
+                var countryId = $(this).val();
+                $('#stateDropdown').empty().append('<option value="">Loading...</option>');
+
+                if (countryId)
+                {
+                    //$.get('/Joins/GetStatesByCountry/' + countryId, function (states) { ... });
+                    $.get('/Joins/GetStatesByCountry/' + countryId, function (states)
+                    {
+                        $('#stateDropdown').empty().append('<option value="">Select a state</option>');
+                        $.each(states, function (i, state)
+                        {
+                            $('#stateDropdown').append('<option value="' + state.StateId + '">' + state.Name + '</option>');
+                        });
+                    });
+                }
+                else
+                {
+                    $('#stateDropdown').empty().append('<option value="">Select state</option>');
+                }
+            });*@
+        });
+    </script>
+}
