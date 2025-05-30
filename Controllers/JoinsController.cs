@@ -33,7 +33,7 @@ namespace CrudTest.Controllers
         public async Task<JsonResult> GetCities(int stateId)
         {
             var cities = await _context.Cities
-                .Where(s => s.StateId == stateId)
+                .Where(c => c.StateId == stateId)
                 .ToListAsync();
             return Json(cities);
         }
