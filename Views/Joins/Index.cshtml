@@ -53,6 +53,12 @@
         <option value="">Select a state</option>
     </select>
 </div>
+<div>
+    <label for="cityDropdown">City:</label>
+    <select id="cityDropdown">
+        <option value="">Select a City</option>
+    </select>
+</div>
 @section Scripts
 {
     <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
@@ -80,6 +86,35 @@
                 $('#stateDropdown').empty().append('<option value="">Select a state</option>');
             }
         });
+                });
+    </script>
+
+    <script>
+        $(document).ready(function ()
+        {
+                    $('#stateDropdown').change(function () {
+            var stateId = $(this).val();
+
+            // Show loading message while waiting for states to load
+            $('#cityDropdown').empty().append('<option value="">Loading...</option>');
+
+            if (stateId) {
+                $.get('/Joins/GetCities?cityId=' + cityId, function (cities) {
+                    $('#cityDropdown').empty().append('<option value="">Select a state</option>');
+
+                    $.each(cities, function (i, city) {
+                        $('#cityDropdown').append('<option value="' + city.cityId + '">' + city.cityname + '</option>');
+                    });
+                }).fail(function () {
+                    $('#cityDropdown').empty().append('<option value="">Failed to load</option>');
+                });
+            } else {
+                $('#cityDropdown').empty().append('<option value="">Select a state</option>');
+            }
+        });
+                });
+    </script>
+}
 
             @*('#countryDropdown').change(function ()
             {
@@ -102,7 +137,8 @@
                 {
                     $('#stateDropdown').empty().append('<option value="">Select state</option>');
                 }
-            });*@
+            });
         });
     </script>
 }
+*@
