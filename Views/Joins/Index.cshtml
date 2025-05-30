@@ -39,6 +39,7 @@
 @{
     ViewData["Title"] = "Country and State";
 }
+<div class=" text-center">
 <h2>Select Location</h2>
 <div>
     <label for="countryDropdown">Country:</label>
@@ -47,17 +48,18 @@
     </select>
 </div>
 
-<div>
+<div><br /><br />
     <label for="stateDropdown">State:</label>
     <select id="stateDropdown">
         <option value="">Select a state</option>
     </select>
 </div>
-<div>
+<div><br /><br />
     <label for="cityDropdown">City:</label>
     <select id="cityDropdown">
         <option value="">Select a City</option>
     </select>
+</div>
 </div>
 @section Scripts
 {
@@ -92,27 +94,33 @@
     <script>
         $(document).ready(function ()
         {
-                    $('#stateDropdown').change(function () {
-            var stateId = $(this).val();
+            $('#stateDropdown').change(function ()
+            {
+                var stateId = $(this).val();
 
-            // Show loading message while waiting for states to load
-            $('#cityDropdown').empty().append('<option value="">Loading...</option>');
+                $('#cityDropdown').empty().append('<option value="">Loading...</option>');
 
-            if (stateId) {
-                $.get('/Joins/GetCities?cityId=' + cityId, function (cities) {
-                    $('#cityDropdown').empty().append('<option value="">Select a state</option>');
+                if (stateId) 
+                {
+                    $.get('/Joins/GetCities?stateId=' + stateId, function (cities) 
+                    {
+                        $('#cityDropdown').empty().append('<option value="">Select a city</option>');
 
-                    $.each(cities, function (i, city) {
-                        $('#cityDropdown').append('<option value="' + city.cityId + '">' + city.cityname + '</option>');
+                        $.each(cities, function (i, city) 
+                          {
+                            $('#cityDropdown').append('<option value="' + city.cityId + '">' + city.cityName + '</option>');
+                          });
+                    }).fail(function () 
+                    {
+                          $('#cityDropdown').empty().append('<option value="">Failed to load</option>');
                     });
-                }).fail(function () {
-                    $('#cityDropdown').empty().append('<option value="">Failed to load</option>');
-                });
-            } else {
-                $('#cityDropdown').empty().append('<option value="">Select a state</option>');
-            }
+                } 
+                else 
+                {
+                    $('#cityDropdown').empty().append('<option value="">Select a city</option>');
+                }
+            });
         });
-                });
     </script>
 }
 
