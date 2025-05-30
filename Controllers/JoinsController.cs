@@ -28,8 +28,17 @@ namespace CrudTest.Controllers
                  .ToListAsync();
              return Json(states);
          }
-        
-       // public IActionResult Index() { return View(); }
+
+        [HttpGet]
+        public async Task<JsonResult> GetCities(int stateId)
+        {
+            var cities = await _context.Cities
+                .Where(s => s.StateId == stateId)
+                .ToListAsync();
+            return Json(cities);
+        }
+
+        // public IActionResult Index() { return View(); }
 
     }
 
