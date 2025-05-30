@@ -39,26 +39,30 @@
 @{
     ViewData["Title"] = "Country and State";
 }
-<div class=" text-center">
-<h2>Select Location</h2>
-<div>
+<div class=" text-center container ">
+<h2 class="font-serif fw-bold ">Select Location</h2><br/>
+<div class=" mb-4">
     <label for="countryDropdown">Country:</label>
     <select id="countryDropdown" asp-items="@(new SelectList(ViewBag.Countries, "CountryId", "Name"))">
         <option value="">Select a country</option>
     </select>
 </div>
 
-<div><br /><br />
+    <div class =" mb-4">
+        
     <label for="stateDropdown">State:</label>
     <select id="stateDropdown">
         <option value="">Select a state</option>
     </select>
 </div>
-<div><br /><br />
+    <div class =" mb-4">
     <label for="cityDropdown">City:</label>
     <select id="cityDropdown">
         <option value="">Select a City</option>
     </select>
+</div>
+<div>
+    <button type="submit" class="btn btn-primary mx-2" style="border-radius: 20px;">Submit</button>
 </div>
 </div>
 @section Scripts
@@ -68,10 +72,9 @@
     <script>
         $(document).ready(function ()
         {
-                    $('#countryDropdown').change(function () {
+            $('#countryDropdown').change(function () {
             var countryId = $(this).val();
 
-            // Show loading message while waiting for states to load
             $('#stateDropdown').empty().append('<option value="">Loading...</option>');
 
             if (countryId) {
@@ -81,9 +84,7 @@
                     $.each(states, function (i, state) {
                         $('#stateDropdown').append('<option value="' + state.stateId + '">' + state.name + '</option>');
                     });
-                }).fail(function () {
-                    $('#stateDropdown').empty().append('<option value="">Failed to load</option>');
-                });
+                })
             } else {
                 $('#stateDropdown').empty().append('<option value="">Select a state</option>');
             }
@@ -94,6 +95,7 @@
     <script>
         $(document).ready(function ()
         {
+            
             $('#stateDropdown').change(function ()
             {
                 var stateId = $(this).val();
@@ -110,19 +112,18 @@
                           {
                             $('#cityDropdown').append('<option value="' + city.cityId + '">' + city.cityName + '</option>');
                           });
-                    }).fail(function () 
-                    {
-                          $('#cityDropdown').empty().append('<option value="">Failed to load</option>');
-                    });
+                    })
                 } 
                 else 
                 {
                     $('#cityDropdown').empty().append('<option value="">Select a city</option>');
                 }
             });
+            $('#countryDropdown').change(function(){$('#cityDropdown').empty().append('<option value="">Select a city</option>');});
         });
     </script>
 }
+
 
             @*('#countryDropdown').change(function ()
             {
