@@ -1,18 +1,23 @@
-﻿@model List<CrudTest.Models.CountryStateViewModel>
+﻿@*model List<CrudTest.Models.CountryStateViewModel>*@
+@model IEnumerable<CrudTest.Models.CountryStateViewModel>
+
+@{
+    var groupedData = Model.GroupBy(x => x.CountryName);
+}
 
 <table class="table">
     <thead>
         <tr>
             <th>Country</th>
-            <th>State</th>
+            <th>States</th>
         </tr>
     </thead>
     <tbody>
-        @foreach (var item in Model)
+        @foreach (var group in groupedData)
         {
             <tr>
-                <td>@item.CountryName</td>
-                <td>@item.StateName</td>
+                <td>@group.Key</td>
+                <td>@string.Join(", ", group.Select(x => x.StateName))</td>
             </tr>
         }
     </tbody>
