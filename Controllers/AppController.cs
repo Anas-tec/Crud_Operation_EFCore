@@ -47,6 +47,10 @@ namespace CrudTest.Controllers
         [HttpPost]
         public IActionResult Edit(Product product)
         {
+            if (!ModelState.IsValid)
+            {
+                return View(product);
+            }
             _context.Products.Update(product);
             _context.SaveChanges();
             return RedirectToAction("Index");

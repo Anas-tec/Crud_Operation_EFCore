@@ -11,26 +11,32 @@
     <div>
         <label>Subject 1:</label>
         <input asp-for="Sub1" type="number" min="0" max="100" required />
+        <span asp-validation-for="Sub1" class="text-danger" required></span>
     </div>
     <div>
         <label>Subject 2:</label>
         <input asp-for="Sub2" type="number" min="0" max="100" required />
+        <span asp-validation-for="Sub2" class="text-danger" required></span>
     </div>
     <div>
         <label>Subject 3:</label>
         <input asp-for="Sub3" type="number" min="0" max="100" required />
+        <span asp-validation-for="Sub3" class="text-danger" required></span>
     </div>
     <div>
         <label>Subject 4:</label>
         <input asp-for="Sub4" type="number" min="0" max="100" required />
+        <span asp-validation-for="Sub4" class="text-danger" required></span>
     </div>
     <div>
         <label>Subject 5:</label>
         <input asp-for="Sub5" type="number" min="0" max="100" required />
+        <span asp-validation-for="Sub5" class="text-danger" required></span>
     </div>
     <div>
         <label>Subject 6:</label>
         <input asp-for="Sub6" type="number" min="0" max="100" required />
+        <span asp-validation-for="Sub6" class="text-danger" required></span>
     </div><br />
     <button type="submit" name="actiontype" value="cal" class="btn btn-primary mx-2" style="border-radius: 20px;">Calculate</button><br /><br />
 
